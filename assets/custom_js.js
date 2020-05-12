@@ -2,7 +2,7 @@ var acc = document.getElementsByClassName("accordion");
 var i;
 
 for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
+  acc[i].addEventListener("click", function () {
     /* Toggle between adding and removing the "active" class,
     to highlight the button that controls the panel */
     this.classList.toggle("active");
@@ -17,13 +17,31 @@ for (i = 0; i < acc.length; i++) {
   });
 }
 
-$(document).ready(function() {
-  
-//   $.noConflict();
-//   $("#demo").owlCarousel({
-//     loop:true,
-//     margin:10,
-//     nav:true,
-//     items:1
+// (function($) {
+
+//   var allPanels = $('.accordion .panel').hide();
+
+//   $('.accordion').click(function() {
+//     allPanels.slideUp();
+//     return false;
 //   });
-});
+
+// })(jQuery);
+
+$(document).ready(function () {
+
+  (function ($) {
+
+    var allPanels = $('.accordion');
+
+    $('.accordion').click(function () {
+      $(this).next().slideToggle("slow").toggleClass("active");
+      return false;
+    });
+
+  })(jQuery);
+
+  $('#product-image-slider').slick({ 
+    dots: true
+  });
+}); 

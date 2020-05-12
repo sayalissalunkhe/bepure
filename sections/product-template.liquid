@@ -42,36 +42,51 @@
   <div class="grid product-single{% if section.settings.enable_payment_button %} product-single--{{ section.settings.image_size }}-image{% endif %}">
     <div class="grid__item product-single__photos {{ product_image_width }}{% if section.settings.image_size == 'full' %} product-single__photos--full{% endif %}">
       {%- assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image -%}
-      {% for image in product.images %}
-        {% capture img_id %}FeaturedImage-{{ section.id }}-{{ image.id }}{% endcapture %}
-        {% capture img_class %}product-featured-img{% endcapture %}
-        {% capture zoom_img_id %}FeaturedImageZoom-{{ section.id }}-{{ image.id }}{% endcapture %}
-        {% capture img_wrapper_id %}{{ zoom_img_id }}-wrapper{% endcapture %}
-        {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      <div class="product-image-slider-div" id="product-image-slider">
+        {% for image in product.images %}
+        <div class="">
+          {% capture img_id %}FeaturedImage-{{ section.id }}-{{ image.id }}{% endcapture %}
+          {% capture img_class %}product-featured-img{% endcapture %}
+          {% capture zoom_img_id %}FeaturedImageZoom-{{ section.id }}-{{ image.id }}{% endcapture %}
+          {% capture img_wrapper_id %}{{ zoom_img_id }}-wrapper{% endcapture %}
+          {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 
-        {% include 'image-style' with image: image, height: height, wrapper_id: img_wrapper_id, img_id: img_id %}
+          {% include 'image-style' with image: image, height: height, wrapper_id: img_wrapper_id, img_id: img_id %}
 
-        <div id="{{ img_wrapper_id }}" class="product-single__photo-wrapper js">
-          <div
-          id="{{ zoom_img_id }}"
-          style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;"
-          class="product-single__photo{% if enable_zoom %} js-zoom-enabled{% endif %}{% if product.images.size > 1 %} product-single__photo--has-thumbnails{% endif %}{% unless featured_image == image %} hide{% endunless %}"
-          data-image-id="{{ image.id }}"
-          {% if enable_zoom %} data-zoom="{{ image | img_url: product_image_zoom_size, scale: product_image_scale }}"{% endif %}>
-            <img id="{{ img_id }}"
-                 class="feature-row__image {{ img_class }} lazyload{% unless featured_image == image %} lazypreload{% endunless %}"
-                 src="{{ image | img_url: '300x300' }}"
-                 data-src="{{ img_url }}"
-                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
-                 data-aspectratio="{{ image.aspect_ratio }}"
-                 data-sizes="auto"
-                 tabindex="-1"
-                 alt="{{ image.alt | escape }}">
+          <!-- <div id="{{ img_wrapper_id }}" class="product-single__photo-wrapper js">
+            <div
+            id="{{ zoom_img_id }}"
+            style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;"
+            class="product-single__photo{% if enable_zoom %} js-zoom-enabled{% endif %}{% if product.images.size > 1 %} product-single__photo--has-thumbnails{% endif %}"
+            data-image-id="{{ image.id }}"
+            {% if enable_zoom %} data-zoom="{{ image | img_url: product_image_zoom_size, scale: product_image_scale }}"{% endif %}>
+              <img id="{{ img_id }}"
+                  class="feature-row__image {{ img_class }} lazyload{% unless featured_image == image %} lazypreload{% endunless %}"
+                  src="{{ image | img_url: '300x300' }}"
+                  data-src="{{ img_url }}"
+                  data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                  data-aspectratio="{{ image.aspect_ratio }}"
+                  data-sizes="auto"
+                  tabindex="-1"
+                  alt="{{ image.alt | escape }}">
+            </div> -->
+            <div id="{{ img_wrapper_id }}" class="product-single__photo-wrapper js">
+              <div>
+                <img id="{{ img_id }}"
+                    src="{{ image | img_url: '300x300' }}"
+                    data-src="{{ img_url }}"
+                    data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                    data-aspectratio="{{ image.aspect_ratio }}"
+                    data-sizes="auto"
+                    tabindex="-1"
+                    alt="{{ image.alt | escape }}">
+              </div>
           </div>
-        </div>
-      {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
 
-      <noscript>
+      {% comment %} <noscript>
         {% capture product_image_size %}{{ height }}x{% endcapture %}
         <img src="{{ featured_image | img_url: product_image_size, scale: product_image_scale }}" alt="{{ featured_image.alt }}" id="FeaturedImage-{{ section.id }}" class="product-featured-img" style="max-width: {{ height }}px;">
       </noscript>
@@ -107,7 +122,8 @@
             </button>
           {% endif %}
         </div>
-      {% endif %}
+      {% endif %} {% endcomment %}
+    
     </div>
 
     <div class="grid__item {{ product_description_width }}">
