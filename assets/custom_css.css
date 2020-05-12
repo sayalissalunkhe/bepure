@@ -1,0 +1,79 @@
+.product_description{
+	/* text-align: center; */
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+	background-color: #1062aa;
+    color: #fff;
+    cursor: pointer;
+    padding: 13px 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+	transition: all 300ms;
+	border-radius: 5px 5px 0 0;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.faq-content .active, .faq-content .accordion:hover {
+	background-color: #1062aa;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.faq-content .panel {
+	padding: 18px;
+	border: 1px solid #1062aa;
+	border-radius: 0 0 5px 5px;
+    display: none;
+    overflow: hidden;
+}
+
+.faq-heading {
+    color: #404040;
+}
+
+.faq-content{
+	margin: 2rem 0;
+}
+
+
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+	.collection-template .grid__item {
+      	padding-left: 22px;
+      	width: 50%;
+	}
+  
+  	.collection-template .product-card__title {
+        display: inherit;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+  
+  	.collection-template .price__regular {
+      	font-size: 14px;
+      	padding: 0.5rem 0;
+  	}
+  
+    .collection-template .price__sale {
+         font-size: 12px;
+    }
+  
+  	.collection-template .spr-badge-starrating .spr-icon {
+        font-size: 12px;
+        opacity: 1;
+  	}
+  
+  	.collection-template .spr-badge-caption {
+        display: block;
+        font-size: 12px;
+    }
+  
+  	.collection-template .grid{    
+    	display: flex;
+    	flex-wrap: wrap;
+  	}
+    
+}
